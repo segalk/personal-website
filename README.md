@@ -1,18 +1,19 @@
-# Senith — Portfolio Website
+# Senith B. — Portfolio Website
 
 A personal portfolio website built with plain HTML, CSS, and JavaScript — no build step, no framework, no dependencies. Drop the files on any static host and it works.
 
-> Note: this build could not pull the exact Figma design (`Senith - Portfolio website`) because the Figma MCP connection hit its Starter-plan rate limit / could not reach the desktop app during this session. The layout below follows the same section structure a typical personal/portfolio template of this name uses (hero, about, services, skills, portfolio grid with project detail pages, testimonials, blog, contact) with placeholder copy and abstract SVG imagery. Swap in the real Figma colors, type, spacing, and images to match pixel-for-pixel — see "Matching it to the Figma file" below.
+Built to match the provided design: a minimal black/white layout with a single red accent, covering Work (filterable project grid), Case Studies, Services, UX Evangelizing (carousel), About Me, and Contact, plus a `project.html` case-study template.
+
+> Note: the real Figma file (`Senith - Portfolio website`) couldn't be pulled directly this session (the Figma MCP connection hit its Starter-plan rate limit), so this was built from the desktop + mobile screenshots supplied directly. Copy, section order, and the color/type system follow those screenshots closely. Project thumbnails, the "UX Evangelizing" carousel image, and the About Me photo are plain placeholder blocks (`.thumb-block` / `.about-photo`, styled as solid dark rounded rectangles) standing in for the real images/photo — swap those in once you have the assets.
 
 ## Structure
 
 ```
-index.html        Home page (all main sections)
-project.html       Project / case-study detail page (?id=1..6)
-css/style.css      All styles (CSS variables at the top control the theme)
-js/main.js         Shared behavior: nav, scroll-spy, reveal animations, filters, testimonial slider, contact form
-js/project.js      Project data + rendering for project.html
-images/*.svg       Placeholder illustrations & project thumbnails (replace with real photos/screens)
+index.html      Home page (all main sections)
+project.html    Project / case-study detail page (?id=1..6)
+css/style.css   All styles (CSS variables at the top control the theme)
+js/main.js      Shared behavior: nav, scroll-spy, work filters, UX Evangelizing carousel
+js/project.js   Project data + rendering for project.html
 ```
 
 ## Running locally
@@ -37,16 +38,16 @@ It's plain static files, so it also deploys as-is to Netlify, Vercel, Cloudflare
 
 ## Customizing
 
-- **Content**: replace the placeholder name, bio, projects, testimonials, and blog posts directly in `index.html`; edit the `projects` array in `js/project.js` for the case-study pages.
-- **Colors/fonts**: edit the CSS custom properties at the top of `css/style.css` (`:root { ... }`).
-- **Images**: swap the files in `images/` with real photos/screenshots — keep the same filenames or update the `src` attributes.
-- **Contact form**: the form is static (no backend). Wire it up to [Formspree](https://formspree.io), Netlify Forms, or your own endpoint by setting the `<form>`'s `action`/`method` and removing the JS `preventDefault` demo handler in `js/main.js`.
+- **Content**: edit the section copy directly in `index.html`; edit the `projects` array in `js/project.js` for the case-study pages (only project 1, "Navigation Redesign", has real copy — the other five are intentionally left as "Placeholder" to match the source design, which only fleshes out one example project).
+- **Colors/fonts**: edit the CSS custom properties at the top of `css/style.css` (`:root { ... }`) — `--accent` is the single red/orange highlight color used throughout.
+- **Images**: replace `.thumb-block` (project thumbnails, case study cards, UX Evangelizing slides, project gallery) and `.about-photo` with real `<img>` elements once you have photos/screenshots — they're currently solid-color placeholder blocks.
+- **Email/social links**: update the `mailto:` address and the LinkedIn/Behance `href`s in the Contact section of `index.html`.
 
-## Matching it to the Figma file
+## Matching it to the Figma file exactly
 
-To make this pixel-accurate to the actual Figma design once Figma access is available:
+This was built from screenshots, not the live Figma file, so spacing/type/color are close approximations rather than exact token values. To tighten it up once Figma access is available:
 
-1. Re-run the Figma MCP `get_design_context` tool against the two frames (`node-id=1-36` and `node-id=1-279`), or export screenshots/specs manually from Figma.
-2. Update `css/style.css` colors, spacing, and typography to match the design tokens.
-3. Replace the SVG placeholders in `images/` with the real exported assets.
-4. Adjust section order/copy in `index.html` and `project.html` to match the two frames exactly.
+1. Re-run the Figma MCP `get_design_context` tool against the two frames (`node-id=1-36` and `node-id=1-279`), or export specs/assets manually from Figma.
+2. Update the CSS custom properties in `css/style.css` to the exact design tokens (colors, spacing scale, font family/weights).
+3. Replace the placeholder blocks with the real exported images/photo.
+4. Double-check copy and section order against the frames for anything the screenshots didn't make legible.
