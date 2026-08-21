@@ -322,13 +322,24 @@ nav { position: relative; }
 .evangelizing-arrow svg { width: 20px; height: 20px; }
 .evangelizing-slide {
   position: absolute; inset: 0;
-  background: var(--dark);
+  background-color: var(--dark);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   opacity: 0;
   transition: opacity 0.5s ease;
   display: flex;
   align-items: flex-end;
   padding: 40px 44px;
 }
+/* Readability scrim over the photo, kept as a plain stylesheet gradient
+   (no url()) so it can't be affected by the base-URL quirk below. */
+.evangelizing-slide::before {
+  content: "";
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.05) 0%, rgba(0, 0, 0, 0.2) 45%, rgba(0, 0, 0, 0.8) 100%);
+}
+.evangelizing-slide .slide-text { position: relative; }
 .evangelizing-slide.active { opacity: 1; }
 .evangelizing-slide .slide-text { max-width: 560px; }
 .evangelizing-slide h3 { color: #fff; font-size: 1.3rem; margin-bottom: 10px; }
