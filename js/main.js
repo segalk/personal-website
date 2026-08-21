@@ -80,6 +80,19 @@ if (evangelizingSlides.length && evangelizingDotsWrap) {
     evangelizingDots.forEach(function (dot, idx) { dot.classList.toggle('active', idx === i); });
   }
 
+  var evangelizingPrev = document.getElementById('evangelizingPrev');
+  var evangelizingNext = document.getElementById('evangelizingNext');
+  if (evangelizingPrev) {
+    evangelizingPrev.addEventListener('click', function () {
+      showSlide((slideIndex - 1 + evangelizingSlides.length) % evangelizingSlides.length);
+    });
+  }
+  if (evangelizingNext) {
+    evangelizingNext.addEventListener('click', function () {
+      showSlide((slideIndex + 1) % evangelizingSlides.length);
+    });
+  }
+
   setInterval(function () {
     showSlide((slideIndex + 1) % evangelizingSlides.length);
   }, 6000);
