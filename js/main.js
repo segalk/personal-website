@@ -48,6 +48,31 @@ if (navToggle) {
   });
 }
 
+// ---------- Sliding nav active-state indicator ----------
+// A single shared bar positioned over whichever link is .active, so it
+// eases smoothly between nav items instead of the old per-link underline
+// jump-cutting. Runs on load/resize, and again whenever scroll-spy (below)
+// changes which link is active.
+var navIndicator = document.getElementById('navIndicator');
+var updateNavIndicator = function () {
+  if (!navIndicator) return;
+  var activeLink = document.querySelector('#navList a.active');
+  if (!activeLink || window.innerWidth <= 860) {
+    navIndicator.style.opacity = '0';
+    return;
+  }
+  var navRect = navIndicator.parentElement.getBoundingClientRect();
+  var linkRect = activeLink.getBoundingClientRect();
+  navIndicator.style.left = (linkRect.left - navRect.left) + 'px';
+  navIndicator.style.width = linkRect.width + 'px';
+  navIndicator.style.opacity = '1';
+};
+if (navIndicator) {
+  updateNavIndicator();
+  window.addEventListener('resize', updateNavIndicator, { passive: true });
+  window.addEventListener('load', updateNavIndicator);
+}
+
 // ---------- Scroll-spy active nav link ----------
 var sections = Array.prototype.slice.call(document.querySelectorAll('main section[id]'));
 var navLinks = Array.prototype.slice.call(document.querySelectorAll('#navList a'));
@@ -59,6 +84,7 @@ if (sections.length && navLinks.length && 'IntersectionObserver' in window) {
       navLinks.forEach(function (link) {
         link.classList.toggle('active', link.getAttribute('href') === '#' + id);
       });
+      updateNavIndicator();
     });
   }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
   sections.forEach(function (section) { spy.observe(section); });
