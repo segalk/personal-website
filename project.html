@@ -41,25 +41,25 @@
 
 <main>
   <section class="project-hero">
-    <div class="container">
-      <a href="index.html#work" class="project-back"><svg width="16" height="16"><use href="#icon-arrow-left"/></svg> Back to Work</a>
-      <span class="kicker" id="projectCategory">UX &amp; Product</span>
-      <h1 id="projectTitle">Project Title</h1>
-      <p id="projectSummary">Project summary goes here.</p>
+    <div class="container" data-reveal-group>
+      <a href="index.html#work" class="project-back reveal"><svg width="16" height="16"><use href="#icon-arrow-left"/></svg> Back to Work</a>
+      <span class="kicker reveal" id="projectCategory">UX &amp; Product</span>
+      <h1 class="reveal" id="projectTitle">Project Title</h1>
+      <p class="reveal" id="projectSummary">Project summary goes here.</p>
     </div>
   </section>
 
   <div class="container">
-    <div class="project-cover" id="projectCover"></div>
+    <div class="project-cover reveal" id="projectCover"></div>
 
-    <div class="project-meta">
-      <div><span>Client</span><strong id="metaClient">—</strong></div>
-      <div><span>Role</span><strong id="metaRole">—</strong></div>
-      <div><span>Timeline</span><strong id="metaTimeline">—</strong></div>
-      <div><span>Tools</span><strong id="metaTools">—</strong></div>
+    <div class="project-meta" data-reveal-group>
+      <div class="reveal"><span>Client</span><strong id="metaClient">—</strong></div>
+      <div class="reveal"><span>Role</span><strong id="metaRole">—</strong></div>
+      <div class="reveal"><span>Timeline</span><strong id="metaTimeline">—</strong></div>
+      <div class="reveal"><span>Tools</span><strong id="metaTools">—</strong></div>
     </div>
 
-    <div class="project-content">
+    <div class="project-content reveal">
       <h2>Overview</h2>
       <p id="projectOverview">Overview text goes here.</p>
 
@@ -74,9 +74,9 @@
       <p id="projectResults">Results text goes here.</p>
     </div>
 
-    <div class="project-gallery" id="projectGallery"></div>
+    <div class="project-gallery" id="projectGallery" data-reveal-group></div>
 
-    <div class="project-nav">
+    <div class="project-nav reveal">
       <a id="prevProject" href="#"><span>&larr; Previous</span><strong id="prevTitle">—</strong></a>
       <a id="nextProject" href="#"><span>Next &rarr;</span><strong id="nextTitle">—</strong></a>
     </div>
@@ -91,7 +91,7 @@
   </div>
 </footer>
 
-<script src="js/main.js"></script>
 <script src="js/project.js"></script>
+<script src="js/main.js"></script>
 </body>
 </html>

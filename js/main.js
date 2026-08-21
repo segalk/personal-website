@@ -97,3 +97,30 @@ if (evangelizingSlides.length && evangelizingDotsWrap) {
     showSlide((slideIndex + 1) % evangelizingSlides.length);
   }, 6000);
 }
+
+// ---------- Scroll reveal (staggered cascade) ----------
+// Content is visible by default (see .reveal in style.css); we only arm the
+// hide-until-revealed behavior once we know IntersectionObserver exists and
+// the visitor hasn't asked for reduced motion, so nothing ever depends on
+// this script to become visible.
+var revealEls = Array.prototype.slice.call(document.querySelectorAll('.reveal'));
+var prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+if (revealEls.length && 'IntersectionObserver' in window && !prefersReducedMotion) {
+  document.querySelectorAll('[data-reveal-group]').forEach(function (group) {
+    Array.prototype.slice.call(group.querySelectorAll('.reveal')).forEach(function (el, i) {
+      el.style.setProperty('--reveal-i', i);
+    });
+  });
+
+  document.body.classList.add('reveal-armed');
+
+  var revealObserver = new IntersectionObserver(function (entries, obs) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in-view');
+        obs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
+  revealEls.forEach(function (el) { revealObserver.observe(el); });
+}

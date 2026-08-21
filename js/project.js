@@ -73,9 +73,12 @@
   var gallery = document.getElementById('projectGallery');
   if (gallery) {
     project.gallery.forEach(function () {
+      var wrapper = document.createElement('div');
+      wrapper.className = 'reveal';
       var block = document.createElement('div');
       block.className = 'thumb-block';
-      gallery.appendChild(block);
+      wrapper.appendChild(block);
+      gallery.appendChild(wrapper);
     });
   }
 
