@@ -203,7 +203,6 @@ nav { position: relative; }
    detail sitting between the hero and Work, not competing with either. */
 .tech-marquee {
   padding: 36px 0;
-  border-block: 1px solid var(--border);
 }
 .tech-marquee-viewport {
   overflow: hidden;
@@ -214,6 +213,7 @@ nav { position: relative; }
   display: flex;
   width: max-content;
   animation: tech-marquee-scroll 36s linear infinite;
+  will-change: transform;
 }
 .tech-marquee-viewport:hover .tech-marquee-track { animation-play-state: paused; }
 .tech-marquee-set {
