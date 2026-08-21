@@ -1,14 +1,22 @@
 /* ---------- Variables ---------- */
+/* Dark is the default theme. [data-theme="light"] below overrides it.
+   --accent (#E64A2E) is kept identical in both themes: against the dark
+   theme's #121212 background it measures ~4.8:1 contrast (passes WCAG AA
+   for normal text); against the light theme's white background it's used
+   only on large/bold display text or as a non-text indicator, where the
+   lower AA large-text/UI threshold (3:1) applies. */
 :root {
-  --bg: #ffffff;
-  --text: #141414;
-  --text-body: #2B2B2B;
-  --text-light: #7E858B;
-  --text-faint: #9b9b9b;
+  color-scheme: dark;
+  --bg: #121212;
+  --surface-alt: #1a1a1d;
+  --text: #f5f5f5;
+  --text-body: #d6d6d6;
+  --text-light: #a0a6ad;
+  --text-faint: #8b9199;
   --accent: #E64A2E;
-  --dark: #2B2B2B;
-  --dark-soft: #262626;
-  --border: #e6e6e6;
+  --dark: #242428;
+  --border: #2a2a2e;
+  --header-bg: rgba(18, 18, 18, 0.85);
   --font: 'Inter', 'Helvetica Neue', Arial, sans-serif;
   --radius-sm: 8px;
   --radius-md: 18px;
@@ -16,6 +24,18 @@
   --container: 1280px;
   --container-pad: 64px;
   --transition: 0.25s ease;
+}
+:root[data-theme="light"] {
+  color-scheme: light;
+  --bg: #ffffff;
+  --surface-alt: #fafafa;
+  --text: #141414;
+  --text-body: #2B2B2B;
+  --text-light: #7E858B;
+  --text-faint: #9b9b9b;
+  --dark: #2B2B2B;
+  --border: #e6e6e6;
+  --header-bg: rgba(255, 255, 255, 0.9);
 }
 
 /* ---------- Reset ---------- */
@@ -27,6 +47,7 @@ body {
   background: var(--bg);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 img { max-width: 100%; display: block; }
 a { color: inherit; text-decoration: none; }
@@ -69,6 +90,7 @@ body.reveal-armed .reveal:not(.in-view) {
 .reveal.in-view { opacity: 1; transform: translateY(0); }
 @media (prefers-reduced-motion: reduce) {
   .reveal { transition: none; }
+  body { transition: none; }
 }
 @media print {
   .reveal { opacity: 1 !important; transform: none !important; }
@@ -79,10 +101,10 @@ body.reveal-armed .reveal:not(.in-view) {
   position: fixed;
   top: 0; left: 0; right: 0;
   z-index: 100;
-  background: rgba(255, 255, 255, 0.9);
+  background: var(--header-bg);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid transparent;
-  transition: border-color var(--transition);
+  transition: border-color var(--transition), background-color var(--transition);
 }
 .site-header.scrolled { border-color: var(--border); }
 .site-header .container {
@@ -112,6 +134,23 @@ body.reveal-armed .reveal:not(.in-view) {
   border-radius: 2px;
 }
 .nav-wrap { display: flex; align-items: center; gap: 24px; }
+.theme-toggle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1.5px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text);
+  flex-shrink: 0;
+  transition: border-color var(--transition), color var(--transition);
+}
+.theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
+.theme-toggle svg { width: 18px; height: 18px; }
+.theme-toggle .icon-moon { display: none; }
+:root[data-theme="light"] .theme-toggle .icon-sun { display: none; }
+:root[data-theme="light"] .theme-toggle .icon-moon { display: block; }
 .nav-toggle {
   display: none;
   flex-direction: column;
@@ -137,8 +176,8 @@ body.reveal-armed .reveal:not(.in-view) {
   color: var(--accent);
   transition: all var(--transition);
 }
-.filter-btn.active { background: var(--text); color: #fff; border-color: var(--text); }
-.filter-btn:hover:not(.active) { background: var(--text); color: #fff; border-color: var(--text); }
+.filter-btn.active { background: var(--text); color: var(--bg); border-color: var(--text); }
+.filter-btn:hover:not(.active) { background: var(--text); color: var(--bg); border-color: var(--text); }
 .work-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
 .work-card { display: block; }
 .thumb-block {
@@ -157,7 +196,7 @@ body.reveal-armed .reveal:not(.in-view) {
 .work-card.hidden { display: none; }
 
 /* ---------- Case Studies ---------- */
-.case-studies { background: #fafafa; }
+.case-studies { background: var(--surface-alt); }
 .case-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
 .case-card { display: block; }
 .case-card .thumb-block { aspect-ratio: 4 / 3.2; }
@@ -209,8 +248,8 @@ body.reveal-armed .reveal:not(.in-view) {
 .evangelizing-slide h3 { color: #fff; font-size: 1.3rem; margin-bottom: 10px; }
 .evangelizing-slide p { color: #cfcfcf; font-size: 0.92rem; }
 .evangelizing-dots { display: flex; justify-content: center; gap: 10px; margin-top: 28px; }
-.evangelizing-dots button { width: 9px; height: 9px; border-radius: 50%; background: var(--border); transition: background var(--transition), transform var(--transition); }
-.evangelizing-dots button:hover:not(.active) { background: var(--text-faint); }
+.evangelizing-dots button { width: 9px; height: 9px; border-radius: 50%; background: var(--text-faint); transition: background var(--transition), transform var(--transition); }
+.evangelizing-dots button:hover:not(.active) { background: var(--text-light); }
 .evangelizing-dots button:focus-visible { outline-offset: 3px; }
 .evangelizing-dots button.active { background: var(--accent); transform: scale(1.25); }
 
@@ -264,7 +303,7 @@ body.reveal-armed .reveal:not(.in-view) {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 24px;
-  background: #fafafa;
+  background: var(--surface-alt);
   border-radius: var(--radius-md);
   padding: 32px;
   margin-bottom: 64px;
@@ -322,7 +361,7 @@ body.nav-open .nav-list {
   display: flex;
   position: fixed;
   top: 88px; left: 0; right: 0;
-  background: #fff;
+  background: var(--bg);
   flex-direction: column;
   padding: 24px;
   gap: 20px;

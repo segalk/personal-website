@@ -3,6 +3,27 @@ document.querySelectorAll('#year').forEach(function (el) {
   el.textContent = new Date().getFullYear();
 });
 
+// ---------- Theme toggle (dark by default) ----------
+var themeToggle = document.getElementById('themeToggle');
+if (themeToggle) {
+  var setTheme = function (theme) {
+    if (theme === 'light') {
+      document.documentElement.setAttribute('data-theme', 'light');
+    } else {
+      document.documentElement.removeAttribute('data-theme');
+    }
+    try { localStorage.setItem('theme', theme); } catch (e) {}
+    themeToggle.setAttribute('aria-pressed', theme === 'light' ? 'true' : 'false');
+    themeToggle.setAttribute('aria-label', theme === 'light' ? 'Switch to dark theme' : 'Switch to light theme');
+  };
+  themeToggle.addEventListener('click', function () {
+    var isLight = document.documentElement.getAttribute('data-theme') === 'light';
+    setTheme(isLight ? 'dark' : 'light');
+  });
+  // Sync aria state with whatever the anti-flash inline script already applied.
+  setTheme(document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark');
+}
+
 // ---------- Header scroll state ----------
 var header = document.getElementById('siteHeader');
 function updateHeaderState() {
