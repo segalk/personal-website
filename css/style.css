@@ -263,6 +263,11 @@ nav { position: relative; }
   overflow: hidden;
   transition: transform 0.4s ease;
 }
+.thumb-block.has-image, .project-cover.has-image {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
 /* Cards get a resting shadow that deepens and spreads on hover, as if the
    card were physically lifting toward the light rather than just scaling. */
 .work-card .thumb-block, .case-card .thumb-block {
@@ -415,6 +420,7 @@ nav { position: relative; }
 .project-content ul li { margin-bottom: 8px; }
 .project-gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 64px; }
 .project-gallery .thumb-block { aspect-ratio: 4/3; }
+.gallery-caption { color: var(--text-light); font-size: 0.85rem; margin-top: 10px; }
 .project-nav {
   border-top: 1px solid var(--border);
   padding-top: 40px;
