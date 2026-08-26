@@ -36,8 +36,7 @@
         { src: 'images/work/athirilli/01-primary-logo-lockup.jpg', caption: 'Primary logo lockup' },
         { src: 'images/work/athirilli/02-swing-tag-mockup.jpg', caption: 'Swing tag — front and back' },
         { src: 'images/work/athirilli/03-swing-tag-reversed.jpg', caption: 'Swing tag — reversed white-on-black, for dark backgrounds' },
-        { src: 'images/work/athirilli/05-product-tag-spread.jpg', caption: 'Product tag / care-label spread' },
-        { src: 'images/work/athirilli/06-product-tag-priced.jpg', caption: 'Product tag applied — with pricing and contact details filled in' }
+        { src: 'images/work/athirilli/05-product-tag-mockup.jpg', caption: 'Product tag — front and back, on packaging' }
       ]
     },
     { id: 4, title: 'Placeholder', category: 'UX & Product', client: 'Placeholder', role: 'Placeholder', timeline: 'Placeholder', tools: 'Placeholder' },
