@@ -403,8 +403,9 @@ nav { position: relative; }
 .project-cover { aspect-ratio: 16/9; background: var(--dark); margin-bottom: 64px; }
 .project-meta {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
+  grid-template-columns: repeat(4, minmax(0, max-content));
+  justify-content: space-between;
+  gap: 32px 40px;
   background: var(--surface-alt);
   border-radius: var(--radius-md);
   padding: 32px;
