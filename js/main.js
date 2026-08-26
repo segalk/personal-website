@@ -266,15 +266,15 @@ if (heroTypewriterEl && heroCursorEl) {
   }
 }
 
-// ---------- Hero CTA / scroll cue: smooth-scroll to Work ----------
+// ---------- Hero CTA: smooth-scroll to Work ----------
+// (The scroll-cue chevron below the CTA is decorative only — a visual
+// "more below" indicator, not a second clickable path — so it has no
+// handler here.)
 var workSection = document.getElementById('work');
-if (workSection) {
-  var scrollToWork = function (e) {
+var heroCta = document.getElementById('heroCta');
+if (workSection && heroCta) {
+  heroCta.addEventListener('click', function (e) {
     e.preventDefault();
     workSection.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth', block: 'start' });
-  };
-  var heroCta = document.getElementById('heroCta');
-  var scrollCue = document.getElementById('scrollCue');
-  if (heroCta) heroCta.addEventListener('click', scrollToWork);
-  if (scrollCue) scrollCue.addEventListener('click', scrollToWork);
+  });
 }

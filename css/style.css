@@ -237,22 +237,18 @@ nav { position: relative; }
 
 /* Sits in normal document flow between the hero and the tech marquee
    (not absolutely positioned), so it always has its own breathing room
-   and can never overlap the marquee below it. */
+   and can never overlap the marquee below it. Purely decorative — a
+   visual "more below" cue, not a second CTA — so it takes no pointer
+   events and isn't focusable/clickable; the "Explore Work" button is
+   the one actual way to trigger the scroll. */
 .scroll-cue {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
+  justify-content: center;
   width: fit-content;
   margin: 0 auto 28px;
   color: var(--text-faint);
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  transition: color var(--transition);
+  pointer-events: none;
 }
-.scroll-cue:hover { color: var(--accent); }
 .scroll-cue svg { animation: scroll-cue-bounce 1.8s ease-in-out infinite; }
 @keyframes scroll-cue-bounce {
   0%, 100% { transform: translateY(0); opacity: 0.6; }
