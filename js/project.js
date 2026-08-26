@@ -34,9 +34,8 @@
       results: 'Adopted as the brand\'s primary mark — used as the Facebook page profile icon since 2014 and still in use over a decade later. Rolled out onto real product packaging: a fold-out product tag featuring the logo alongside wash-care instructions, a size/quantity checklist, contact details, and pricing.',
       gallery: [
         { src: 'images/work/athirilli/01-primary-logo-lockup.jpg', caption: 'Primary logo lockup' },
-        { src: 'images/work/athirilli/02-swing-tag-front.jpg', caption: 'Swing tag — front, primary lockup with brand accent palette' },
+        { src: 'images/work/athirilli/02-swing-tag-mockup.jpg', caption: 'Swing tag — front and back' },
         { src: 'images/work/athirilli/03-swing-tag-reversed.jpg', caption: 'Swing tag — reversed white-on-black, for dark backgrounds' },
-        { src: 'images/work/athirilli/04-size-chart-card.jpg', caption: 'Swing tag — back, international size chart' },
         { src: 'images/work/athirilli/05-product-tag-spread.jpg', caption: 'Product tag / care-label spread' },
         { src: 'images/work/athirilli/06-product-tag-priced.jpg', caption: 'Product tag applied — with pricing and contact details filled in' }
       ]
