@@ -33,7 +33,7 @@
       highlights: ['Mosaic-tile icon in four colors, standing in for folded bed linen', 'Sinhala calligraphic wordmark alongside the Latin brand name', 'Reversed white-on-black variant for dark backgrounds'],
       results: 'Adopted as the brand\'s primary mark — used as the Facebook page profile icon since 2014 and still in use over a decade later. Rolled out onto real product packaging: a fold-out product tag featuring the logo alongside wash-care instructions, a size/quantity checklist, contact details, and pricing.',
       gallery: [
-        { src: 'images/work/athirilli/01-primary-logo-lockup.jpg', caption: 'Primary logo lockup' },
+        { src: 'images/work/athirilli/01-primary-logo-lockup.jpg', caption: 'Primary logo' },
         { src: 'images/work/athirilli/02-swing-tag-mockup.jpg', caption: 'Swing tag — front and back' },
         { src: 'images/work/athirilli/03-swing-tag-reversed.jpg', caption: 'Logo — reverse white on black, for dark backgrounds' },
         { src: 'images/work/athirilli/05-product-tag-mockup.jpg', caption: 'Product tag — front and back, on packaging' }
