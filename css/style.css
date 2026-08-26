@@ -194,7 +194,19 @@ nav { position: relative; }
 .nav-toggle:hover span { background: var(--accent); }
 
 /* ---------- Hero ---------- */
-.hero { padding: 200px 0 96px; }
+/* Full-viewport hero: the hero content, scroll cue, and tech marquee
+   together fill exactly one screen on load, so Work starts fully below
+   the fold. 100dvh (with 100vh as a fallback for older browsers) avoids
+   the classic mobile-browser issue where 100vh is taller than what's
+   actually visible once the address bar is accounted for. */
+.hero-viewport {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  padding-top: 88px; /* clears the fixed header */
+}
+.hero { flex: 1; display: flex; align-items: center; }
 .hero h1 {
   font-size: clamp(2.4rem, 5vw, 3.4rem);
   margin-bottom: 24px;
@@ -204,6 +216,51 @@ nav { position: relative; }
   min-height: 3.45em;
 }
 .hero p.lead { font-size: 1.1rem; color: var(--text-body); max-width: 544px; }
+
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.98rem;
+  padding: 16px 30px;
+  border-radius: 999px;
+  margin-top: 40px;
+  box-shadow: 0 8px 24px rgba(230, 74, 46, 0.25);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+.hero-cta:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(230, 74, 46, 0.35); }
+.hero-cta svg { transition: transform var(--transition); }
+.hero-cta:hover svg { transform: translateY(2px); }
+
+/* Sits in normal document flow between the hero and the tech marquee
+   (not absolutely positioned), so it always has its own breathing room
+   and can never overlap the marquee below it. */
+.scroll-cue {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  width: fit-content;
+  margin: 0 auto 28px;
+  color: var(--text-faint);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: color var(--transition);
+}
+.scroll-cue:hover { color: var(--accent); }
+.scroll-cue svg { animation: scroll-cue-bounce 1.8s ease-in-out infinite; }
+@keyframes scroll-cue-bounce {
+  0%, 100% { transform: translateY(0); opacity: 0.6; }
+  50% { transform: translateY(6px); opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .scroll-cue svg { animation: none; }
+}
 
 /* Blinking cursor for the hero's typewriter effect. Solid (no blink)
    while actively typing/deleting via .typing; blinks during pauses. */
@@ -481,7 +538,7 @@ nav { position: relative; }
   .service-item p { max-width: 560px; }
   .evangelizing-track { aspect-ratio: 4/3; }
   section { padding: 80px 0; }
-  .hero { padding-top: 160px; }
+  .hero { padding: 0; }
 }
 @media (max-width: 640px) {
   .work-grid, .case-grid { grid-template-columns: 1fr; }

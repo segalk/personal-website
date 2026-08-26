@@ -265,3 +265,16 @@ if (heroTypewriterEl && heroCursorEl) {
     heroTick();
   }
 }
+
+// ---------- Hero CTA / scroll cue: smooth-scroll to Work ----------
+var workSection = document.getElementById('work');
+if (workSection) {
+  var scrollToWork = function (e) {
+    e.preventDefault();
+    workSection.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth', block: 'start' });
+  };
+  var heroCta = document.getElementById('heroCta');
+  var scrollCue = document.getElementById('scrollCue');
+  if (heroCta) heroCta.addEventListener('click', scrollToWork);
+  if (scrollCue) scrollCue.addEventListener('click', scrollToWork);
+}
