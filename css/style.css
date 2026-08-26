@@ -195,8 +195,35 @@ nav { position: relative; }
 
 /* ---------- Hero ---------- */
 .hero { padding: 200px 0 96px; }
-.hero h1 { font-size: clamp(2.4rem, 5vw, 3.4rem); margin-bottom: 24px; max-width: 544px; }
+.hero h1 {
+  font-size: clamp(2.4rem, 5vw, 3.4rem);
+  margin-bottom: 24px;
+  max-width: 544px;
+  /* Reserves room for the tallest of the rotating headlines so the lead
+     paragraph below doesn't jump as shorter/longer sentences cycle in. */
+  min-height: 3.45em;
+}
 .hero p.lead { font-size: 1.1rem; color: var(--text-body); max-width: 544px; }
+
+/* Blinking cursor for the hero's typewriter effect. Solid (no blink)
+   while actively typing/deleting via .typing; blinks during pauses. */
+.hero-cursor {
+  display: inline-block;
+  width: 3px;
+  height: 0.85em;
+  margin-left: 4px;
+  background: var(--accent);
+  vertical-align: text-bottom;
+  animation: hero-cursor-blink 1s step-end infinite;
+}
+.hero-cursor.typing { animation: none; opacity: 1; }
+@keyframes hero-cursor-blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-cursor { animation: none; opacity: 1; }
+}
 
 /* ---------- Tech Stack Marquee ---------- */
 /* Deliberately quiet: muted color, small type, no accent — a background

@@ -171,3 +171,97 @@ if (revealEls.length && 'IntersectionObserver' in window && !prefersReducedMotio
   }, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
   revealEls.forEach(function (el) { revealObserver.observe(el); });
 }
+
+// ---------- Hero typewriter ----------
+// Types out each headline character by character, pauses, deletes it, and
+// moves to the next — looping forever. Screen readers get a static
+// sr-only sentence instead (see index.html); the animated span is
+// aria-hidden so AT users aren't read constantly-mutating text.
+var heroTypewriterEl = document.getElementById('heroTypewriter');
+var heroCursorEl = document.getElementById('heroCursor');
+if (heroTypewriterEl && heroCursorEl) {
+  var heroSentences = [
+    { text: 'Making complex systems feel obvious.', accent: 'feel' },
+    { text: 'Building design systems that let good ideas scale.', accent: 'scale' },
+    { text: "Logos that carry a brand's whole story in one mark.", accent: 'story' }
+  ];
+
+  if (prefersReducedMotion) {
+    // No animation: show the first headline as static text.
+    heroTypewriterEl.innerHTML = heroSentences[0].text.replace(
+      heroSentences[0].accent,
+      '<span class="accent">' + heroSentences[0].accent + '</span>'
+    );
+  } else {
+    var HERO_TYPE_SPEED = 55;
+    var HERO_DELETE_SPEED = 30;
+    var HERO_PAUSE_AFTER_TYPE = 1800;
+    var HERO_PAUSE_AFTER_DELETE = 400;
+
+    var heroSentenceIndex = 0;
+    var heroCharIndex = 0;
+    var heroIsDeleting = false;
+
+    var heroEscapeDiv = document.createElement('div');
+    function heroEscapeHtml(str) {
+      heroEscapeDiv.textContent = str;
+      return heroEscapeDiv.innerHTML;
+    }
+
+    function heroRenderRevealed(fullText, revealLength, accentWord) {
+      var revealed = fullText.slice(0, revealLength);
+      var accentStart = fullText.indexOf(accentWord);
+      var accentEnd = accentStart + accentWord.length;
+
+      if (accentStart === -1 || revealLength <= accentStart) {
+        return heroEscapeHtml(revealed);
+      }
+
+      var before = revealed.slice(0, accentStart);
+      var accentPart = revealed.slice(accentStart, Math.min(revealLength, accentEnd));
+      var after = revealed.slice(accentEnd);
+
+      return heroEscapeHtml(before) +
+        '<span class="accent">' + heroEscapeHtml(accentPart) + '</span>' +
+        heroEscapeHtml(after);
+    }
+
+    function heroTick() {
+      var current = heroSentences[heroSentenceIndex];
+      var fullText = current.text;
+
+      heroTypewriterEl.innerHTML = heroRenderRevealed(fullText, heroCharIndex, current.accent);
+
+      var delay;
+
+      if (!heroIsDeleting) {
+        heroCursorEl.classList.add('typing');
+        heroCharIndex++;
+        delay = HERO_TYPE_SPEED;
+
+        if (heroCharIndex > fullText.length) {
+          heroCharIndex = fullText.length;
+          heroIsDeleting = true;
+          heroCursorEl.classList.remove('typing');
+          delay = HERO_PAUSE_AFTER_TYPE;
+        }
+      } else {
+        heroCursorEl.classList.add('typing');
+        heroCharIndex--;
+        delay = HERO_DELETE_SPEED;
+
+        if (heroCharIndex < 0) {
+          heroCharIndex = 0;
+          heroIsDeleting = false;
+          heroSentenceIndex = (heroSentenceIndex + 1) % heroSentences.length;
+          heroCursorEl.classList.remove('typing');
+          delay = HERO_PAUSE_AFTER_DELETE;
+        }
+      }
+
+      setTimeout(heroTick, delay);
+    }
+
+    heroTick();
+  }
+}
