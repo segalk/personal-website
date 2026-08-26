@@ -23,6 +23,7 @@
       category: 'Logo Design',
       summary: 'A logo for a Sri Lankan bed linen brand, built from mosaic tiles that echo folded sheets and a Sinhala calligraphic wordmark rooted in local identity.',
       client: 'Athirilli',
+      clientUrl: 'https://www.facebook.com/Athirilli/',
       role: 'Logo & Brand Identity Designer',
       timeline: '2014 · 2 weeks',
       tools: 'Adobe Illustrator',
@@ -51,6 +52,7 @@
     p.results = p.results || 'Results copy for this project goes here.';
     p.gallery = p.gallery || [1, 1];
     p.cover = p.cover || null;
+    p.clientUrl = p.clientUrl || null;
     return p;
   });
 
@@ -74,7 +76,20 @@
   setText('projectCategory', project.category);
   setText('projectTitle', project.title);
   setText('projectSummary', project.summary);
-  setText('metaClient', project.client);
+  var metaClientEl = document.getElementById('metaClient');
+  if (metaClientEl) {
+    if (project.clientUrl) {
+      var clientLink = document.createElement('a');
+      clientLink.href = project.clientUrl;
+      clientLink.target = '_blank';
+      clientLink.rel = 'noopener noreferrer';
+      clientLink.textContent = project.client;
+      metaClientEl.textContent = '';
+      metaClientEl.appendChild(clientLink);
+    } else {
+      metaClientEl.textContent = project.client;
+    }
+  }
   setText('metaRole', project.role);
   setText('metaTimeline', project.timeline);
   setText('metaTools', project.tools);
