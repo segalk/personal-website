@@ -288,7 +288,7 @@ nav { position: relative; }
 .case-studies { background: var(--surface-alt); }
 .case-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
 .case-card { display: block; }
-.case-card .thumb-block { aspect-ratio: 4 / 3.2; }
+.case-card .thumb-block { aspect-ratio: 4 / 3; }
 .case-card .info { padding-top: 16px; }
 .case-card .info span { color: var(--text-faint); font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; }
 .case-card .info h3 { font-size: 1rem; margin-top: 6px; font-weight: 700; }
