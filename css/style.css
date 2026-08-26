@@ -233,7 +233,7 @@ nav { position: relative; }
 }
 .hero-cta:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(230, 74, 46, 0.35); }
 .hero-cta svg { transition: transform var(--transition); }
-.hero-cta:hover svg { transform: translateY(2px); }
+.hero-cta:hover svg { transform: translateX(3px); }
 
 /* Sits in normal document flow between the hero and the tech marquee
    (not absolutely positioned), so it always has its own breathing room
