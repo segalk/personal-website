@@ -35,7 +35,7 @@
       gallery: [
         { src: 'images/work/athirilli/01-primary-logo-lockup.jpg', caption: 'Primary logo lockup' },
         { src: 'images/work/athirilli/02-swing-tag-mockup.jpg', caption: 'Swing tag — front and back' },
-        { src: 'images/work/athirilli/03-swing-tag-reversed.jpg', caption: 'Swing tag — reversed white-on-black, for dark backgrounds' },
+        { src: 'images/work/athirilli/03-swing-tag-reversed.jpg', caption: 'Logo — reverse white on black, for dark backgrounds' },
         { src: 'images/work/athirilli/05-product-tag-mockup.jpg', caption: 'Product tag — front and back, on packaging' }
       ]
     },
