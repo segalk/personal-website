@@ -40,7 +40,40 @@
         { src: 'images/work/athirilli/05-product-tag-mockup.jpg', caption: 'Product tag — front and back, on packaging' }
       ]
     },
-    { id: 4, title: 'Placeholder', category: 'UX & Product', client: 'Placeholder', role: 'Placeholder', timeline: 'Placeholder', tools: 'Placeholder' },
+    {
+      id: 4,
+      title: 'Conditional Formatting for IFS Cloud',
+      category: 'UX & Product',
+      summary: 'Users had no self-serve way to visually flag important rows in dense IFS Cloud lists — any change needed a developer. I designed and shipped a simple rule builder, phased basic conditions first and validated with real usage data before scoping complex logic, then refined it twice post-launch.',
+      client: 'IFS Cloud',
+      role: 'Experience Design Lead',
+      timeline: '22R2 → 2XRX',
+      tools: 'Figma, Microsoft Teams, Confluence, Jira',
+      overview: 'IFS Cloud\'s list views had no formatting capability at all — every row looked the same regardless of what it meant, and the only way to visually flag anything (an overdue order, a high-value line) was to ask a developer to hard-code it. As Experience Design Lead, I owned this end-to-end: research synthesis, interaction design, visual design, design-system alignment, delivery, and post-launch iteration, working alongside a Product Manager, Program Manager, Technical Design Lead, two developers, and a QA Lead.',
+      challenge: 'IFS Cloud lists can hold hundreds of dense rows, and users had no self-serve way to visually flag what mattered — an overdue order, a high-value line, a record in a given state — without scanning every column, every time. The goal: let end users define their own visual rules, background color and text style, based on field values, applied to a single field or an entire row, built entirely from existing design-system colors, and reusable rather than one-off.',
+      solution: 'I added "New Formatting" and "Manage Formatting" as two entries inside the existing Column Chooser menu — a pattern users already knew, rather than introducing new navigation. Building a rule is a 3-step accordion: pick the attribute, set the condition using the same operators used elsewhere in IFS Cloud (=, ≠, <, >), then choose a style from the existing design-system palette and decide whether it applies to the field or the entire row. Rules are saved, listed, and editable or deletable from a single panel, including multi-condition (AND) rules — formatting is a reusable, visible setting per view, not a one-off action. Basic conditions shipped first in release 22R2 and were validated with real users before complex, multi-attribute AND/OR logic followed in 2XRX. The rule builder is built entirely from IFS Cloud\'s existing design-system components, so responsive behavior came from those components directly rather than requiring bespoke work.',
+      highlights: ['Added inside the existing Column Chooser menu — no new navigation to learn', '3-step rule builder: attribute → condition → style, reusing IFS Cloud\'s existing operators and design-system colors', 'Basic single-condition rules shipped first in 22R2; complex AND/OR logic followed in 2XRX once validated with real users'],
+      results: 'Shipped with no developer involvement required per rule, and no new colors added to the design system — validated over a rolling 30-day window via Fullstory, with strong completion on the lightweight flow and steady, ongoing use of the fuller rule-management dialog.',
+      research: 'Research ran in two tracks. I benchmarked against the standard way conditional formatting is handled across enterprise-grade tools broadly — Excel and Smart Sheet among the reference points — looking at the category-level pattern (attribute → operator → value/style) rather than any single product\'s implementation, then decided how much of that model IFS Cloud actually needed. Before any screens were built, I also mapped the interaction using a flow-diagramming technique — screen, user reaction, and an arrow to the next screen and action — covering both basic and complex condition paths up front, including multi-attribute AND/OR logic. That map was used to scope the proof-of-concept with engineering before a single screen was designed. What I deliberately didn\'t carry over from tools like Excel: the depth. IFS Cloud\'s version needed to be the simplest version of that same idea, validated with real users before any of that power was added.',
+      rejected: {
+        intro: 'Every scope decision came from one governing principle, applied consistently: ship the simplest validated version first, then let real usage data — not assumptions — justify each expansion. Explored and deliberately deferred, all under that reasoning:',
+        items: [
+          'Complex, multi-condition rules (AND/OR logic) — mapped in full during flow work, phased into 2XRX once basic conditions were validated with real users.',
+          'OR conditions — only AND-combined conditions shipped in 22R2 (e.g. "Price > 2000 AND State = Planned"); OR logic was scoped out with the rest of complex-condition support.',
+          'Condition hierarchy / reordering — deferred alongside complex conditions rather than built in isolation.',
+          'Text formatting (color applied to text, not just backgrounds) — explicitly ruled out on principle: applying color to text risked real readability issues.',
+          'User-defined/custom colors and a themeable color picker — the 22R2 formatting engine only supported a fixed 4-color Signal palette; I proposed a themeable palette as a separate, hypothesis-driven future proposal rather than blocking the release on a token change.',
+          'Context substitution variables (e.g. #USER_ID#, #COMPANY_NAME#) and CSV-style dynamic values — kept out of the initial release, to extend later based on technical possibility.'
+        ]
+      },
+      outcomes: [
+        '~97% completion on the lightweight New Formatting flow — 10,030 users clicked New Formatting, 9,726 clicked Apply.',
+        '1,618 Conditional Format dialog opens over the window — steady, ongoing use of the full rule-management dialog.',
+        '904 cancel clicks: mostly users opening out of curiosity and exiting immediately (no friction); a smaller group moves back and forth between fields before exiting, hinting the fuller dialog may be harder to navigate than the lightweight path.'
+      ],
+      keyLearnings: 'Shipping self-serve conditional formatting meant users could flag what mattered themselves for the first time, with no developer involvement and no new colors added to the design system. Two real defects were caught and resolved after launch: a light-theme link-visibility issue — independently corroborated when I found Jira had resolved the identical problem the same way — and a formatting-vs-edit-mode conflict resolved with badge-based indicators that hold up outside the input\'s own chrome. The color-token constraint was documented rather than hidden, with a hypothesis-driven proposal for a themeable palette carried into future releases instead of quietly worked around.',
+      whatsNext: 'A themeable Signal/Background palette, introduced alongside the existing Signal palette, to let users create a visual hierarchy between high-severity conditions and minor ones — built on the testable hypothesis that users apply more than 4 conditions per list, to be validated before committing further. Text formatting remains intentionally out of scope. On the complex-dialog side: bring more of the lightweight New Formatting flow\'s simplicity into the fuller multi-condition dialog, informed by session-replay analysis of where that group currently loses momentum.'
+    },
     { id: 5, title: 'Placeholder', category: 'Branding', client: 'Placeholder', role: 'Placeholder', timeline: 'Placeholder', tools: 'Placeholder' },
     { id: 6, title: 'Placeholder', category: 'Logo Design', client: 'Placeholder', role: 'Placeholder', timeline: 'Placeholder', tools: 'Placeholder' }
   ].map(function (p) {
@@ -53,6 +86,11 @@
     p.gallery = p.gallery || [1, 1];
     p.cover = p.cover || null;
     p.clientUrl = p.clientUrl || null;
+    p.research = p.research || null;
+    p.rejected = p.rejected || null;
+    p.outcomes = p.outcomes || null;
+    p.keyLearnings = p.keyLearnings || null;
+    p.whatsNext = p.whatsNext || null;
     return p;
   });
 
@@ -97,6 +135,54 @@
   setText('projectChallenge', project.challenge);
   setText('projectSolution', project.solution);
   setText('projectResults', project.results);
+
+  // Optional deeper-dive sections — only rendered for projects that
+  // actually provide the data, so shorter case studies don't show empty
+  // headings.
+  var extraEl = document.getElementById('projectExtraSections');
+  if (extraEl) {
+    function addHeading(text) {
+      var h2 = document.createElement('h2');
+      h2.textContent = text;
+      extraEl.appendChild(h2);
+    }
+    function addParagraph(text) {
+      var p = document.createElement('p');
+      p.textContent = text;
+      extraEl.appendChild(p);
+    }
+    function addList(items) {
+      var ul = document.createElement('ul');
+      items.forEach(function (item) {
+        var li = document.createElement('li');
+        li.textContent = item;
+        ul.appendChild(li);
+      });
+      extraEl.appendChild(ul);
+    }
+
+    if (project.research) {
+      addHeading('Research & Approach');
+      addParagraph(project.research);
+    }
+    if (project.rejected) {
+      addHeading('What I Left Out');
+      addParagraph(project.rejected.intro);
+      addList(project.rejected.items);
+    }
+    if (project.outcomes) {
+      addHeading('Outcomes');
+      addList(project.outcomes);
+    }
+    if (project.keyLearnings) {
+      addHeading('Key Learnings');
+      addParagraph(project.keyLearnings);
+    }
+    if (project.whatsNext) {
+      addHeading('What\'s Next');
+      addParagraph(project.whatsNext);
+    }
+  }
 
   var coverEl = document.getElementById('projectCover');
   if (coverEl && project.cover) {
