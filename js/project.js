@@ -9,6 +9,7 @@
       role: 'Lead Product Designer',
       timeline: '6 weeks',
       tools: 'Figma, HTML/CSS',
+      cover: 'images/work/navigation-redesign/00-cover-nav-hero.jpg',
       overview: 'The client\'s core product had grown feature-by-feature for years, and navigation no longer matched how teams actually worked. This project rebuilt the information architecture from the ground up.',
       challenge: 'Users could technically reach any feature, but rarely the fastest way — new hires took weeks to become fluent in the navigation alone.',
       solution: 'I ran card-sorting sessions with real users, restructured the primary navigation around tasks rather than features, and introduced a lightweight wayfinding system (breadcrumbs, contextual shortcuts) that scaled across the platform\'s densest screens.',
