@@ -60,6 +60,7 @@
       id: 4,
       title: 'Conditional Formatting for Dense Enterprise Lists',
       category: 'UX & Product',
+      cover: 'images/work/conditional-formatting/00-cover-formatting-modal.jpg',
       summary: 'Users had no self-serve way to visually flag important rows in dense enterprise software lists — any change needed a developer. I designed and shipped a simple rule builder, phased basic conditions first and validated with real usage data before scoping complex logic, then refined it post-launch.',
       client: 'Enterprise Cloud Platform',
       role: 'Experience Design Lead',
