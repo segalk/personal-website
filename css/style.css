@@ -521,7 +521,7 @@ nav { position: relative; }
   border-radius: var(--radius-md);
   overflow: hidden;
   box-shadow: var(--shadow-resting);
-  cursor: zoom-in;
+  cursor: pointer;
   transition: box-shadow var(--transition);
 }
 .project-inline-image { display: block; width: 100%; height: auto; }
@@ -536,7 +536,7 @@ button.thumb-block.lightbox-trigger {
   padding: 0;
   font: inherit;
   text-align: inherit;
-  cursor: zoom-in;
+  cursor: pointer;
 }
 
 /* ---------- Lightbox ---------- */
@@ -568,9 +568,13 @@ button.thumb-block.lightbox-trigger {
   max-height: 100%;
   opacity: 0;
   transform: scale(0.96);
+  /* Transitioned only once .is-ready is added (the image has actually
+     finished loading) — see js/main.js. Fading it in as soon as the
+     backdrop opens, before the image has a real size to lay out at, is
+     what produced the visible jerk/snap this replaces. */
   transition: opacity var(--transition), transform var(--transition);
 }
-.lightbox.is-open .lightbox-content { opacity: 1; transform: scale(1); }
+.lightbox-content.is-ready { opacity: 1; transform: scale(1); }
 .lightbox-image {
   display: block;
   max-width: 100%;

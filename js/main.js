@@ -285,6 +285,7 @@ if (workSection && heroCta) {
 // Escape, and returns focus to the element that opened it.
 var lightbox = document.getElementById('lightbox');
 if (lightbox) {
+  var lightboxContent = lightbox.querySelector('.lightbox-content');
   var lightboxImage = document.getElementById('lightboxImage');
   var lightboxCaption = document.getElementById('lightboxCaption');
   var lightboxClose = document.getElementById('lightboxClose');
@@ -302,11 +303,20 @@ if (lightbox) {
     }
   }
 
+  // Two rAFs, not one: a single rAF can land in the same paint as the
+  // hidden -> visible change, so the browser jumps straight to the end
+  // state instead of animating from it. Waiting a full extra frame
+  // guarantees the start state has actually been painted first.
+  function nextFrame(fn) {
+    requestAnimationFrame(function () {
+      requestAnimationFrame(fn);
+    });
+  }
+
   function openLightbox(trigger) {
     var src = trigger.dataset.lightboxSrc;
     if (!src) return;
     lightboxLastTrigger = trigger;
-    lightboxImage.src = src;
     lightboxImage.alt = trigger.dataset.lightboxAlt || '';
     if (trigger.dataset.lightboxCaption) {
       lightboxCaption.textContent = trigger.dataset.lightboxCaption;
@@ -315,21 +325,38 @@ if (lightbox) {
       lightboxCaption.textContent = '';
       lightboxCaption.hidden = true;
     }
+
     lightbox.hidden = false;
     document.body.classList.add('lightbox-open');
     document.addEventListener('keydown', onLightboxKeydown);
-    // Add the open class on the next frame so the hidden -> visible change
-    // and the opacity/scale transition don't collapse into one paint.
-    requestAnimationFrame(function () {
+
+    // The backdrop dims in right away so the click feels instant. The
+    // content (image + caption + close button) is held at opacity 0 until
+    // the image has actually finished loading — see the onload handler
+    // below — so it always fades/scales in already at its real size
+    // instead of appearing small/wrong-sized and snapping once the image
+    // data arrives. That size-snap was the source of the visible jerk.
+    nextFrame(function () {
       lightbox.classList.add('is-open');
     });
-    lightboxClose.focus();
+
+    lightboxContent.classList.remove('is-ready');
+    lightboxImage.onload = lightboxImage.onerror = function () {
+      lightboxImage.onload = lightboxImage.onerror = null;
+      nextFrame(function () {
+        lightboxContent.classList.add('is-ready');
+        lightboxClose.focus();
+      });
+    };
+    lightboxImage.src = src;
   }
 
   function closeLightbox() {
     lightbox.classList.remove('is-open');
+    lightboxContent.classList.remove('is-ready');
     document.body.classList.remove('lightbox-open');
     document.removeEventListener('keydown', onLightboxKeydown);
+    lightboxImage.onload = lightboxImage.onerror = null;
     window.setTimeout(function () {
       lightbox.hidden = true;
       lightboxImage.src = '';
