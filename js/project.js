@@ -98,24 +98,83 @@
       tools: 'Figma',
       overview: 'This enterprise software platform\'s list views had no formatting capability at all — every row looked the same regardless of what it meant, and the only way to visually flag anything (an overdue order, a high-value line) was to ask a developer to hard-code it. As Experience Design Lead, I owned this end-to-end: research synthesis, interaction design, visual design, design-system alignment, delivery, and post-launch iteration, working alongside a small cross-functional team spanning product, engineering, and QA.',
       challenge: 'The platform\'s lists can hold hundreds of dense rows, and users had no self-serve way to visually flag what mattered — an overdue order, a high-value line, a record in a given state — without scanning every column, every time. The goal: let end users define their own visual rules, background color and text style, based on field values, applied to a single field or an entire row, built entirely from existing design-system colors, and reusable rather than one-off.',
+      challengeImage: {
+        src: 'images/work/conditional-formatting/07-user-journey.png',
+        alt: 'Before-and-after user journey for an operations planner going from manually scanning a dense list to relying on self-serve formatting rules',
+        caption: 'The low point wasn\'t the scanning — it was needing a developer just to change a colour. That reframed the brief from "add conditional formatting" to "take the developer out of the loop."'
+      },
+      solutionLeadImage: {
+        src: 'images/work/conditional-formatting/06-before-after.png',
+        alt: 'The same list before and after formatting rules are applied, showing overdue rows now standing out immediately',
+        caption: 'Same data, read in a glance instead of a scan.'
+      },
       solution: 'I added the formatting option as new entries inside an existing settings menu users already used — a pattern they already knew, rather than introducing new navigation. Building a rule is a 3-step accordion: pick the attribute, set the condition using the platform\'s existing comparison operators, then choose a style from the existing design-system palette and decide whether it applies to the field or the entire row. Rules are saved, listed, and editable or deletable from a single panel, including multi-condition (AND) rules — formatting is a reusable, visible setting per view, not a one-off action. Basic single-condition rules shipped first and were validated with real users before complex, multi-attribute AND/OR logic followed in a later release. The rule builder is built entirely from the platform\'s existing design-system components, so responsive behavior came from those components directly rather than requiring bespoke work.',
+      solutionImage: [
+        {
+          src: 'images/work/conditional-formatting/08-solution.png',
+          alt: 'The formatting option added as new entries inside an existing settings menu',
+          caption: 'Discovery — no new UI chrome, just two new entries inside a menu users already opened.'
+        },
+        {
+          src: 'images/work/conditional-formatting/09-rule-builder.png',
+          alt: 'The 3-step rule builder with Attribute, Condition, and Style sections expanded',
+          caption: 'Attribute, condition, style — the whole rule reads as one sentence before it\'s applied.'
+        },
+        {
+          src: 'images/work/conditional-formatting/10-dropdown-states.png',
+          alt: 'The condition operator dropdown and the style colour-swatch dropdown, showing their expanded states',
+          caption: 'Colours are shown as the fill they produce, not a name — you pick the outcome, not a label.'
+        },
+        {
+          src: 'images/work/conditional-formatting/11-manage-rules.png',
+          alt: 'The manage-formatting panel listing existing rules, each editable or deletable',
+          caption: 'Every rule listed as a plain sentence, editable or removable from one panel.'
+        }
+      ],
       highlights: ['Added inside an existing settings menu — no new navigation to learn', '3-step rule builder: attribute → condition → style, reusing the platform\'s existing operators and design-system colors', 'Basic single-condition rules shipped first; complex AND/OR logic followed in a later release once validated with real users'],
+      highlightsImage: {
+        src: 'images/work/conditional-formatting/02-user-flows.png',
+        alt: 'User flows for creating a rule, managing rules, combining two conditions, and the post-launch edit-mode fix',
+        caption: 'The lightweight create flow, managing rules, combining conditions, and the post-launch fix — mapped as one connected set before a single screen was built.'
+      },
       results: 'Shipped with no developer involvement required per rule, and no new colors added to the design system — validated with real usage data, showing strong completion on the lightweight flow and steady, ongoing use of the fuller rule-management dialog.',
       research: 'Research ran in two tracks. I benchmarked against the standard way conditional formatting is handled across enterprise-grade tools broadly — spreadsheet and productivity tools among the reference points — looking at the category-level pattern (attribute → operator → value/style) rather than any single product\'s implementation, then decided how much of that model this platform actually needed. Before any screens were built, I also mapped the interaction using a flow-diagramming technique — screen, user reaction, and an arrow to the next screen and action — covering both basic and complex condition paths up front, including multi-attribute AND/OR logic. That map was used to scope the proof-of-concept with engineering before a single screen was designed. What I deliberately didn\'t carry over from tools like Excel: the depth. This platform\'s version needed to be the simplest version of that same idea, validated with real users before any of that power was added.',
+      researchImage: {
+        src: 'images/work/conditional-formatting/03-user-persona.png',
+        alt: 'Three user types — the daily scanner, the curious opener, and the rule builder — with their behaviour, needs, and design implications',
+        caption: 'Not persona research in the formal sense — three usage profiles drawn from the brief and, after launch, from what the data actually showed people doing.'
+      },
       rejected: {
         intro: 'Every scope decision came from one governing principle, applied consistently: ship the simplest validated version first, then let real usage data — not assumptions — justify each expansion. Explored and deliberately deferred, all under that reasoning:',
         items: [
           'Complex, multi-condition rules (AND/OR logic) — mapped in full during flow work, phased into a later release once basic conditions were validated with real users.',
           'Condition hierarchy and reordering — deferred alongside complex conditions rather than built in isolation.',
           'Text formatting (color applied to text, not just backgrounds) — explicitly ruled out on principle: applying color to text risked real readability issues.'
-        ]
+        ],
+        image: {
+          src: 'images/work/conditional-formatting/05-design-options.png',
+          alt: 'Three scope decisions recorded with their outcome: parked, designed but held back, or ruled out on principle',
+          caption: 'Three decisions, three different endings — the distinction between "not yet" and "not ever" mattered more than the outcome itself.'
+        }
       },
       outcomes: [
         'Strong completion on the lightweight formatting flow, with the large majority of users who opened it going on to apply a rule.',
         'Steady, ongoing use of the full rule-management dialog over the measurement window.',
         'A smaller group moved back and forth between fields and settings before exiting the fuller dialog — a signal it may be harder to navigate than the lightweight path.'
       ],
-      keyLearnings: 'Shipping self-serve conditional formatting meant users could flag what mattered themselves for the first time, with no developer involvement and no new colors added to the design system. Complex, multi-attribute conditions followed in a later release, validated before extending it, not assumed. A couple of real usability issues surfaced after launch and were resolved with targeted design fixes that held up across themes and editable states. Constraints in the underlying color system were documented rather than hidden, with further refinements considered for future releases instead of quietly worked around.'
+      keyLearnings: 'Shipping self-serve conditional formatting meant users could flag what mattered themselves for the first time, with no developer involvement and no new colors added to the design system. Complex, multi-attribute conditions followed in a later release, validated before extending it, not assumed. A couple of real usability issues surfaced after launch and were resolved with targeted design fixes that held up across themes and editable states. Constraints in the underlying color system were documented rather than hidden, with further refinements considered for future releases instead of quietly worked around.',
+      keyLearningsImage: [
+        {
+          src: 'images/work/conditional-formatting/12-edit-mode-fix.png',
+          alt: 'A formatted row losing its colour in edit mode, and the shipped fix using an accent bar outside the input\'s own chrome',
+          caption: 'Fixed at component level rather than patched visually — the same reasoning already used for badges elsewhere in the product.'
+        },
+        {
+          src: 'images/work/conditional-formatting/04-working-notes.png',
+          alt: 'Working notes clustering the problem statement, benchmarking, scope calls, design-system constraints, and post-launch discoveries',
+          caption: 'Working notes kept as they were worked through, rather than cleaned up after the fact — including the constraints that shaped what shipped.'
+        }
+      ]
     },
     { id: 5, title: 'Placeholder', category: 'Branding', client: 'Placeholder', role: 'Placeholder', timeline: 'Placeholder', tools: 'Placeholder' },
     { id: 6, title: 'Placeholder', category: 'Logo Design', client: 'Placeholder', role: 'Placeholder', timeline: 'Placeholder', tools: 'Placeholder' }
@@ -138,6 +197,7 @@
     p.rejected = p.rejected || null;
     p.outcomes = p.outcomes || null;
     p.keyLearnings = p.keyLearnings || null;
+    p.keyLearningsImage = p.keyLearningsImage || null;
     p.whatsNext = p.whatsNext || null;
     return p;
   });
@@ -195,6 +255,20 @@
     return figure;
   }
 
+  // A section can supply either one image or several (in reading order).
+  // Inserting each right after the previous one keeps them in order
+  // regardless of how many there are.
+  function insertImagesAfter(anchorEl, images) {
+    if (!images) return;
+    var list = Array.isArray(images) ? images : [images];
+    var cursor = anchorEl;
+    list.forEach(function (image) {
+      var figure = createInlineFigure(image);
+      cursor.insertAdjacentElement('afterend', figure);
+      cursor = figure;
+    });
+  }
+
   document.title = project.title + ' — Senith B.';
 
   // The back link reflects where the visitor actually came from (Work grid
@@ -241,7 +315,7 @@
     solutionEl.insertAdjacentElement('beforebegin', createInlineFigure(project.solutionLeadImage));
   }
   if (project.solutionImage && solutionEl) {
-    solutionEl.insertAdjacentElement('afterend', createInlineFigure(project.solutionImage));
+    insertImagesAfter(solutionEl, project.solutionImage);
   }
 
   // Optional deeper-dive sections — only rendered for projects that
@@ -287,6 +361,10 @@
     if (project.keyLearnings) {
       addHeading('Key Learnings');
       addParagraph(project.keyLearnings);
+      if (project.keyLearningsImage) {
+        var keyLearningsImages = Array.isArray(project.keyLearningsImage) ? project.keyLearningsImage : [project.keyLearningsImage];
+        keyLearningsImages.forEach(function (image) { extraEl.appendChild(createInlineFigure(image)); });
+      }
     }
     if (project.whatsNext) {
       addHeading('What\'s Next');
