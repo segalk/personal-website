@@ -2,20 +2,35 @@
   var projects = [
     {
       id: 1,
-      title: 'Navigation Redesign',
+      title: 'Enterprise Navigation Redesign',
       category: 'UX & Product',
-      summary: 'Simplifying wayfinding across a dense enterprise platform.',
-      client: 'Enterprise Software Co.',
-      role: 'Lead Product Designer',
-      timeline: '6 weeks',
-      tools: 'Figma, HTML/CSS',
+      summary: 'Navigation was scattered across inconsistent panels with different interaction models, costing users time on every repeat visit. I led the end-to-end redesign of the platform\'s core navigation — consolidating bookmarks, page browsing, and recent-screen history into one consistent interaction shell — validated with real users and shipped to measurable adoption growth.',
+      client: 'Enterprise Cloud Platform',
+      role: 'Experience Design Lead',
+      timeline: 'Two-phase rollout',
+      tools: 'Figma',
       cover: 'images/work/navigation-redesign/00-cover-nav-hero.jpg',
-      overview: 'The client\'s core product had grown feature-by-feature for years, and navigation no longer matched how teams actually worked. This project rebuilt the information architecture from the ground up.',
-      challenge: 'Users could technically reach any feature, but rarely the fastest way — new hires took weeks to become fluent in the navigation alone.',
-      solution: 'I ran card-sorting sessions with real users, restructured the primary navigation around tasks rather than features, and introduced a lightweight wayfinding system (breadcrumbs, contextual shortcuts) that scaled across the platform\'s densest screens.',
-      highlights: ['Restructured navigation around user tasks, not internal feature names', 'Introduced a consistent wayfinding pattern across 40+ screens', 'Documented the new IA as a reusable pattern for future features'],
-      results: 'Time-to-find-feature dropped noticeably in follow-up usability testing, and onboarding time for new users shortened as a direct result.',
-      gallery: [1, 1]
+      overview: 'Navigation on this enterprise platform was split across several separate panels — a bookmarks panel, a page navigator, a recent-screens panel, and a utility panel — each with its own trigger location, interaction pattern, and visual language. As Experience Design Lead, I owned this end-to-end: research synthesis, interaction design, visual design, and delivery, working alongside a cross-functional team spanning engineering, QA, product and program management, with a UX researcher supporting validation.',
+      challenge: 'Users had no single, predictable place to look for navigation — one panel expanded horizontally, another opened full-screen, a third overlaid the working area entirely, and users couldn\'t tell what a given icon did without clicking it. Bookmarking was a particular pain point: the icon opened add/manage options without expanding the panel itself, and the collapsed state hid a user\'s full saved list. The goal: unify these into one location with a consistent interaction pattern, freeing up working-area space rather than shrinking it.',
+      solution: 'I designed one shared panel shell reachable from a single icon rail, with different contents per trigger, so users learn the interaction once and it holds everywhere. The bookmarks panel now surfaces add/manage actions, a quick-access row, and a color-coded, collapsible list, staying open through navigation instead of closing on first click. The page navigator moved to the same shell with a search field, view-switcher, and drill-down list. The recent-screens panel moved from a full-screen takeover to the same consistent treatment, with substantially more visible entries and per-content-type thumbnails. I deliberately held taxonomy, labelling, panel dimensions, and drill-down logic constant throughout — this release was about making navigation consistent to reach and predictable to use, not a full rewrite users would have had to relearn.',
+      highlights: ['Consolidated three inconsistent navigation panels into one shared shell with a single interaction pattern', 'Validated the redesign through moderated usability sessions across a deliberately mixed range of user experience levels', 'Preserved and improved existing accessibility compliance through the relocation, verified jointly with engineering'],
+      results: 'Shipped in phases — deeper redesign work in bookmarks and recent screens first, with the page navigator\'s trigger unified into the same shell while its fuller redesign was intentionally sequenced for later. Post-launch analytics showed substantial adoption growth across all three consolidated mechanisms, with bookmarking showing the largest relative gain, consistent with it having been the most-cited friction point in research.',
+      research: 'Research combined qualitative synthesis with a direct walkthrough of the existing experience. User interviews surfaced recurring frictions: navigation felt fragmented across too many similar surfaces, users described a repeated cycle of losing context while hunting for what they needed, and bookmarking specifically felt like it cost more effort to set up than it returned. I built proto-personas first, treating them as assumptions rather than findings, then rebuilt them against the research so the personas that shaped the work came out of evidence rather than going into it — three survived, representing distinct usage patterns and product-familiarity levels. I then moderated remote usability sessions against interactive prototypes with a small group of end users deliberately spread across experience levels and role types, with a UX researcher observing and taking notes. Each session ran the same three tasks matching the wayfinding mechanisms the redesign introduced, testing whether people could find a relocated trigger unprompted rather than whether they liked the layout. I also benchmarked against how a couple of comparable large-scale enterprise platforms structure primary navigation — not to copy a specific menu, but to understand that mature platforms at this scale all run several navigation mechanisms in parallel, each solving a different repeat-visit problem, and that the real issue here was inconsistency between them rather than having several to begin with.',
+      rejected: {
+        intro: 'Every panel went through an iteration process — early directions, an alternate approach, and a validated final direction — with real trade-offs recorded rather than presented as clean wins:',
+        items: [
+          'Label-less, tooltip-driven bookmark commands were explored and dropped as too likely to confuse users; a "quick edit mode" was cut for lacking a strong enough rationale.',
+          'Pinning favorite navigation items to the top, and a separate "item options" panel concept, were both explored but left unresolved on feasibility rather than shipped.',
+          'Removing the "set as start page" capability entirely was proposed during a related relocation, then explicitly rejected: a capability already in wide use can\'t be withdrawn on an assumption, without notice or evidence that people wouldn\'t miss it.',
+          'A richer recent-screens direction with filter/sort and delete-item actions was dropped in favor of a leaner shipped version, validating the simple version first before adding more.'
+        ]
+      },
+      outcomes: [
+        'Page-navigation usage grew substantially year over year, with the same relative ranking of top destinations as before — indicating the redesign made existing workflows easier rather than redirecting behavior.',
+        'Recent-screens usage grew even more sharply over the same period.',
+        'Bookmarking usage saw the largest relative gain of the three, consistent with it having been the most-cited friction point in interviews.'
+      ],
+      keyLearnings: 'Every participant completed every task in testing, and the design still had real problems that only surfaced by going back to session recordings rather than relying on success rates alone — a bookmarking control people looked for in the wrong place, and a thumbnail treatment that helped experienced users while leaving newer ones guessing. Arguing successfully against removing an already-relied-upon capability, on the basis that usage evidence should drive removal rather than assumption, mattered as much as any individual design decision. Cross-functional delivery on something that touches the whole product shell meant working in small, constantly-communicated pieces rather than one large handoff, and adapting how the same decision was presented to engineering, QA, and product/program stakeholders in turn.'
     },
     { id: 2, title: 'Placeholder', category: 'Branding', client: 'Placeholder', role: 'Placeholder', timeline: 'Placeholder', tools: 'Placeholder' },
     {
