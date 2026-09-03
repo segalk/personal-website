@@ -146,11 +146,19 @@
   function createInlineFigure(image) {
     var figure = document.createElement('figure');
     figure.className = 'project-inline-figure';
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'project-inline-image-btn lightbox-trigger';
+    btn.setAttribute('aria-label', 'View larger image' + (image.caption ? ': ' + image.caption : ''));
+    btn.dataset.lightboxSrc = image.src;
+    if (image.alt) btn.dataset.lightboxAlt = image.alt;
+    if (image.caption) btn.dataset.lightboxCaption = image.caption;
     var img = document.createElement('img');
     img.className = 'project-inline-image';
     img.src = image.src;
     img.alt = image.alt || '';
-    figure.appendChild(img);
+    btn.appendChild(img);
+    figure.appendChild(btn);
     if (image.caption) {
       var figcaption = document.createElement('figcaption');
       figcaption.className = 'project-inline-caption';
@@ -261,11 +269,16 @@
     project.gallery.forEach(function (item) {
       var wrapper = document.createElement('div');
       wrapper.className = 'reveal';
-      var block = document.createElement('div');
+      var hasImage = item && typeof item === 'object' && item.src;
+      var block = document.createElement(hasImage ? 'button' : 'div');
       block.className = 'thumb-block';
-      if (item && typeof item === 'object' && item.src) {
-        block.classList.add('has-image');
+      if (hasImage) {
+        block.type = 'button';
+        block.classList.add('has-image', 'lightbox-trigger');
         block.style.backgroundImage = 'url(\'' + item.src + '\')';
+        block.setAttribute('aria-label', 'View larger image' + (item.caption ? ': ' + item.caption : ''));
+        block.dataset.lightboxSrc = item.src;
+        if (item.caption) block.dataset.lightboxCaption = item.caption;
       }
       wrapper.appendChild(block);
       if (item && typeof item === 'object' && item.caption) {

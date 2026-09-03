@@ -278,3 +278,77 @@ if (workSection && heroCta) {
     workSection.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth', block: 'start' });
   });
 }
+
+// ---------- Image lightbox ----------
+// Opens a full-size view for any ".lightbox-trigger" (gallery thumbnails,
+// inline diagram figures). Closes via the (X) button, a backdrop click, or
+// Escape, and returns focus to the element that opened it.
+var lightbox = document.getElementById('lightbox');
+if (lightbox) {
+  var lightboxImage = document.getElementById('lightboxImage');
+  var lightboxCaption = document.getElementById('lightboxCaption');
+  var lightboxClose = document.getElementById('lightboxClose');
+  var lightboxLastTrigger = null;
+
+  function onLightboxKeydown(e) {
+    if (e.key === 'Escape') {
+      closeLightbox();
+    } else if (e.key === 'Tab') {
+      // The close button is the only focusable element in the dialog while
+      // it's open, so keep focus trapped there instead of tabbing out to
+      // the page underneath.
+      e.preventDefault();
+      lightboxClose.focus();
+    }
+  }
+
+  function openLightbox(trigger) {
+    var src = trigger.dataset.lightboxSrc;
+    if (!src) return;
+    lightboxLastTrigger = trigger;
+    lightboxImage.src = src;
+    lightboxImage.alt = trigger.dataset.lightboxAlt || '';
+    if (trigger.dataset.lightboxCaption) {
+      lightboxCaption.textContent = trigger.dataset.lightboxCaption;
+      lightboxCaption.hidden = false;
+    } else {
+      lightboxCaption.textContent = '';
+      lightboxCaption.hidden = true;
+    }
+    lightbox.hidden = false;
+    document.body.classList.add('lightbox-open');
+    document.addEventListener('keydown', onLightboxKeydown);
+    // Add the open class on the next frame so the hidden -> visible change
+    // and the opacity/scale transition don't collapse into one paint.
+    requestAnimationFrame(function () {
+      lightbox.classList.add('is-open');
+    });
+    lightboxClose.focus();
+  }
+
+  function closeLightbox() {
+    lightbox.classList.remove('is-open');
+    document.body.classList.remove('lightbox-open');
+    document.removeEventListener('keydown', onLightboxKeydown);
+    window.setTimeout(function () {
+      lightbox.hidden = true;
+      lightboxImage.src = '';
+    }, prefersReducedMotion ? 0 : 250);
+    if (lightboxLastTrigger) {
+      lightboxLastTrigger.focus();
+      lightboxLastTrigger = null;
+    }
+  }
+
+  document.addEventListener('click', function (e) {
+    var trigger = e.target.closest('.lightbox-trigger');
+    if (trigger) {
+      e.preventDefault();
+      openLightbox(trigger);
+      return;
+    }
+    if (e.target.closest('[data-lightbox-close]')) closeLightbox();
+  });
+
+  lightboxClose.addEventListener('click', closeLightbox);
+}
