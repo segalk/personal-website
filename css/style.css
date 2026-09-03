@@ -351,6 +351,7 @@ nav { position: relative; }
 /* Cards get a resting shadow that deepens and spreads on hover, as if the
    card were physically lifting toward the light rather than just scaling. */
 .work-card .thumb-block, .case-card .thumb-block {
+  border-radius: 8px;
   box-shadow: var(--shadow-resting);
   transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
@@ -480,7 +481,7 @@ nav { position: relative; }
 .project-back { display: inline-flex; align-items: center; gap: 8px; color: var(--accent); font-weight: 600; margin-bottom: 24px; font-size: 0.9rem; }
 .project-hero h1 { font-size: clamp(2rem, 4vw, 2.8rem); margin-bottom: 18px; max-width: 700px; }
 .project-hero p { color: var(--text-light); font-size: 1.05rem; max-width: 640px; }
-.project-cover { aspect-ratio: 16/9; background: var(--dark); margin-bottom: 64px; }
+.project-cover { aspect-ratio: 16/9; background: var(--dark); border-radius: var(--radius-md); margin-bottom: 64px; }
 .project-meta {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, max-content));
