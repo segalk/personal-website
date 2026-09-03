@@ -12,10 +12,20 @@
       cover: 'images/work/navigation-redesign/00-cover-nav-hero.jpg',
       overview: 'Navigation on this enterprise platform was split across several separate panels — a bookmarks panel, a page navigator, a recent-screens panel, and a utility panel — each with its own trigger location, interaction pattern, and visual language. As Experience Design Lead, I owned this end-to-end: research synthesis, interaction design, visual design, and delivery, working alongside a cross-functional team spanning engineering, QA, product and program management, with a UX researcher supporting validation.',
       challenge: 'Users had no single, predictable place to look for navigation — one panel expanded horizontally, another opened full-screen, a third overlaid the working area entirely, and users couldn\'t tell what a given icon did without clicking it. Bookmarking was a particular pain point: the icon opened add/manage options without expanding the panel itself, and the collapsed state hid a user\'s full saved list. The goal: unify these into one location with a consistent interaction pattern, freeing up working-area space rather than shrinking it.',
+      challengeImage: {
+        src: 'images/work/navigation-redesign/02-user-journey.png',
+        alt: 'Before-and-after user journey map showing a user\'s frustration easing once the redesigned navigation is in place',
+        caption: 'Mapping the same task before and after made the real cost visible: the pain wasn\'t the first search, it was that none of that effort carried over to the next visit.'
+      },
       solution: 'I designed one shared panel shell reachable from a single icon rail, with different contents per trigger, so users learn the interaction once and it holds everywhere. The bookmarks panel now surfaces add/manage actions, a quick-access row, and a color-coded, collapsible list, staying open through navigation instead of closing on first click. The page navigator moved to the same shell with a search field, view-switcher, and drill-down list. The recent-screens panel moved from a full-screen takeover to the same consistent treatment, with substantially more visible entries and per-content-type thumbnails. I deliberately held taxonomy, labelling, panel dimensions, and drill-down logic constant throughout — this release was about making navigation consistent to reach and predictable to use, not a full rewrite users would have had to relearn.',
       highlights: ['Consolidated three inconsistent navigation panels into one shared shell with a single interaction pattern', 'Validated the redesign through moderated usability sessions across a deliberately mixed range of user experience levels', 'Preserved and improved existing accessibility compliance through the relocation, verified jointly with engineering'],
       results: 'Shipped in phases — deeper redesign work in bookmarks and recent screens first, with the page navigator\'s trigger unified into the same shell while its fuller redesign was intentionally sequenced for later. Post-launch analytics showed substantial adoption growth across all three consolidated mechanisms, with bookmarking showing the largest relative gain, consistent with it having been the most-cited friction point in research.',
       research: 'Research combined qualitative synthesis with a direct walkthrough of the existing experience. User interviews surfaced recurring frictions: navigation felt fragmented across too many similar surfaces, users described a repeated cycle of losing context while hunting for what they needed, and bookmarking specifically felt like it cost more effort to set up than it returned. I built proto-personas first, treating them as assumptions rather than findings, then rebuilt them against the research so the personas that shaped the work came out of evidence rather than going into it — three survived, representing distinct usage patterns and product-familiarity levels. I then moderated remote usability sessions against interactive prototypes with a small group of end users deliberately spread across experience levels and role types, with a UX researcher observing and taking notes. Each session ran the same three tasks matching the wayfinding mechanisms the redesign introduced, testing whether people could find a relocated trigger unprompted rather than whether they liked the layout. I also benchmarked against how a couple of comparable large-scale enterprise platforms structure primary navigation — not to copy a specific menu, but to understand that mature platforms at this scale all run several navigation mechanisms in parallel, each solving a different repeat-visit problem, and that the real issue here was inconsistency between them rather than having several to begin with.',
+      researchImage: {
+        src: 'images/work/navigation-redesign/03-personas.png',
+        alt: 'Three validated personas spanning different levels of product familiarity and usage patterns',
+        caption: 'The three validated personas used to stress-test a single navigation model against very different familiarity levels.'
+      },
       rejected: {
         intro: 'Every panel went through an iteration process — early directions, an alternate approach, and a validated final direction — with real trade-offs recorded rather than presented as clean wins:',
         items: [
@@ -23,7 +33,12 @@
           'Pinning favorite navigation items to the top, and a separate "item options" panel concept, were both explored but left unresolved on feasibility rather than shipped.',
           'Removing the "set as start page" capability entirely was proposed during a related relocation, then explicitly rejected: a capability already in wide use can\'t be withdrawn on an assumption, without notice or evidence that people wouldn\'t miss it.',
           'A richer recent-screens direction with filter/sort and delete-item actions was dropped in favor of a leaner shipped version, validating the simple version first before adding more.'
-        ]
+        ],
+        image: {
+          src: 'images/work/navigation-redesign/04-design-options.png',
+          alt: 'Explored, dropped, and shipped directions recorded for each of the three panels',
+          caption: 'The explored-and-dropped record for each panel, kept alongside the shipped direction rather than discarded.'
+        }
       },
       outcomes: [
         'Page-navigation usage grew substantially year over year, with the same relative ranking of top destinations as before — indicating the redesign made existing workflows easier rather than redirecting behavior.',
@@ -99,7 +114,9 @@
     p.gallery = p.gallery || [1, 1];
     p.cover = p.cover || null;
     p.clientUrl = p.clientUrl || null;
+    p.challengeImage = p.challengeImage || null;
     p.research = p.research || null;
+    p.researchImage = p.researchImage || null;
     p.rejected = p.rejected || null;
     p.outcomes = p.outcomes || null;
     p.keyLearnings = p.keyLearnings || null;
@@ -121,6 +138,26 @@
   function setText(elId, value) {
     var el = document.getElementById(elId);
     if (el) el.textContent = value;
+  }
+
+  // Inline figure used to drop a supporting diagram/screenshot at a specific
+  // point in the narrative (e.g. right after the Challenge copy), rather
+  // than only at the bottom gallery.
+  function createInlineFigure(image) {
+    var figure = document.createElement('figure');
+    figure.className = 'project-inline-figure';
+    var img = document.createElement('img');
+    img.className = 'project-inline-image';
+    img.src = image.src;
+    img.alt = image.alt || '';
+    figure.appendChild(img);
+    if (image.caption) {
+      var figcaption = document.createElement('figcaption');
+      figcaption.className = 'project-inline-caption';
+      figcaption.textContent = image.caption;
+      figure.appendChild(figcaption);
+    }
+    return figure;
   }
 
   document.title = project.title + ' — Senith B.';
@@ -148,6 +185,11 @@
   setText('projectChallenge', project.challenge);
   setText('projectSolution', project.solution);
   setText('projectResults', project.results);
+
+  if (project.challengeImage) {
+    var challengeEl = document.getElementById('projectChallenge');
+    if (challengeEl) challengeEl.insertAdjacentElement('afterend', createInlineFigure(project.challengeImage));
+  }
 
   // Optional deeper-dive sections — only rendered for projects that
   // actually provide the data, so shorter case studies don't show empty
@@ -177,11 +219,13 @@
     if (project.research) {
       addHeading('Research & Approach');
       addParagraph(project.research);
+      if (project.researchImage) extraEl.appendChild(createInlineFigure(project.researchImage));
     }
     if (project.rejected) {
       addHeading('What I Left Out');
       addParagraph(project.rejected.intro);
       addList(project.rejected.items);
+      if (project.rejected.image) extraEl.appendChild(createInlineFigure(project.rejected.image));
     }
     if (project.outcomes) {
       addHeading('Outcomes');
