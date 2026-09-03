@@ -150,8 +150,17 @@
   var index = projects.findIndex(function (p) { return p.id === id; });
   if (index === -1) index = 0;
   var project = projects[index];
-  var prev = projects[(index - 1 + projects.length) % projects.length];
-  var next = projects[(index + 1) % projects.length];
+
+  // Prev/Next follow the same alphabetical-by-title order the homepage
+  // grids display, not the declaration order above (which is unrelated —
+  // it's just the order projects were added to this file).
+  var alphabetical = projects.slice().sort(function (a, b) {
+    return a.title.localeCompare(b.title);
+  });
+  var alphaIndex = alphabetical.findIndex(function (p) { return p.id === id; });
+  if (alphaIndex === -1) alphaIndex = 0;
+  var prev = alphabetical[(alphaIndex - 1 + alphabetical.length) % alphabetical.length];
+  var next = alphabetical[(alphaIndex + 1) % alphabetical.length];
 
   function setText(elId, value) {
     var el = document.getElementById(elId);
@@ -187,6 +196,16 @@
   }
 
   document.title = project.title + ' — Senith B.';
+
+  // The back link reflects where the visitor actually came from (Work grid
+  // vs Case Studies grid), rather than always pointing back to Work — both
+  // grids link to this same detail page, distinguished only by ?from=.
+  if (getParam('from') === 'case-studies') {
+    var backLink = document.getElementById('projectBackLink');
+    if (backLink) backLink.href = 'index.html#case-studies';
+    setText('projectBackLabel', 'Back to Case Studies');
+  }
+
   setText('projectCategory', project.category);
   setText('projectTitle', project.title);
   setText('projectSummary', project.summary);
