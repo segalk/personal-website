@@ -29,7 +29,7 @@
 }
 :root[data-theme="light"] {
   color-scheme: light;
-  --bg: #ffffff;
+  --bg: #f2f2f2;
   --surface-alt: #fafafa;
   --text: #141414;
   --text-body: #2B2B2B;
