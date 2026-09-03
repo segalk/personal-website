@@ -17,8 +17,23 @@
         alt: 'Before-and-after user journey map showing a user\'s frustration easing once the redesigned navigation is in place',
         caption: 'Mapping the same task before and after made the real cost visible: the pain wasn\'t the first search, it was that none of that effort carried over to the next visit.'
       },
+      solutionLeadImage: {
+        src: 'images/work/navigation-redesign/05-before-after.png',
+        alt: 'Before and after: three scattered navigation triggers consolidated into one rail',
+        caption: 'One way in, instead of four.'
+      },
       solution: 'I designed one shared panel shell reachable from a single icon rail, with different contents per trigger, so users learn the interaction once and it holds everywhere. The bookmarks panel now surfaces add/manage actions, a quick-access row, and a color-coded, collapsible list, staying open through navigation instead of closing on first click. The page navigator moved to the same shell with a search field, view-switcher, and drill-down list. The recent-screens panel moved from a full-screen takeover to the same consistent treatment, with substantially more visible entries and per-content-type thumbnails. I deliberately held taxonomy, labelling, panel dimensions, and drill-down logic constant throughout — this release was about making navigation consistent to reach and predictable to use, not a full rewrite users would have had to relearn.',
+      solutionImage: {
+        src: 'images/work/navigation-redesign/06-solution-rail.png',
+        alt: 'The shared icon rail shown in the shipped product',
+        caption: 'The shared rail in context.'
+      },
       highlights: ['Consolidated three inconsistent navigation panels into one shared shell with a single interaction pattern', 'Validated the redesign through moderated usability sessions across a deliberately mixed range of user experience levels', 'Preserved and improved existing accessibility compliance through the relocation, verified jointly with engineering'],
+      highlightsImage: {
+        src: 'images/work/navigation-redesign/07-all-panels.png',
+        alt: 'The Navigator, Bookmarks, and Recent screens panels shown side by side',
+        caption: 'Different contents, one shared shell.'
+      },
       results: 'Shipped in phases — deeper redesign work in bookmarks and recent screens first, with the page navigator\'s trigger unified into the same shell while its fuller redesign was intentionally sequenced for later. Post-launch analytics showed substantial adoption growth across all three consolidated mechanisms, with bookmarking showing the largest relative gain, consistent with it having been the most-cited friction point in research.',
       research: 'Research combined qualitative synthesis with a direct walkthrough of the existing experience. User interviews surfaced recurring frictions: navigation felt fragmented across too many similar surfaces, users described a repeated cycle of losing context while hunting for what they needed, and bookmarking specifically felt like it cost more effort to set up than it returned. I built proto-personas first, treating them as assumptions rather than findings, then rebuilt them against the research so the personas that shaped the work came out of evidence rather than going into it — three survived, representing distinct usage patterns and product-familiarity levels. I then moderated remote usability sessions against interactive prototypes with a small group of end users deliberately spread across experience levels and role types, with a UX researcher observing and taking notes. Each session ran the same three tasks matching the wayfinding mechanisms the redesign introduced, testing whether people could find a relocated trigger unprompted rather than whether they liked the layout. I also benchmarked against how a couple of comparable large-scale enterprise platforms structure primary navigation — not to copy a specific menu, but to understand that mature platforms at this scale all run several navigation mechanisms in parallel, each solving a different repeat-visit problem, and that the real issue here was inconsistency between them rather than having several to begin with.',
       researchImage: {
@@ -115,6 +130,9 @@
     p.cover = p.cover || null;
     p.clientUrl = p.clientUrl || null;
     p.challengeImage = p.challengeImage || null;
+    p.solutionLeadImage = p.solutionLeadImage || null;
+    p.solutionImage = p.solutionImage || null;
+    p.highlightsImage = p.highlightsImage || null;
     p.research = p.research || null;
     p.researchImage = p.researchImage || null;
     p.rejected = p.rejected || null;
@@ -199,6 +217,14 @@
     if (challengeEl) challengeEl.insertAdjacentElement('afterend', createInlineFigure(project.challengeImage));
   }
 
+  var solutionEl = document.getElementById('projectSolution');
+  if (project.solutionLeadImage && solutionEl) {
+    solutionEl.insertAdjacentElement('beforebegin', createInlineFigure(project.solutionLeadImage));
+  }
+  if (project.solutionImage && solutionEl) {
+    solutionEl.insertAdjacentElement('afterend', createInlineFigure(project.solutionImage));
+  }
+
   // Optional deeper-dive sections — only rendered for projects that
   // actually provide the data, so shorter case studies don't show empty
   // headings.
@@ -262,6 +288,9 @@
       li.textContent = item;
       highlightsList.appendChild(li);
     });
+    if (project.highlightsImage) {
+      highlightsList.insertAdjacentElement('afterend', createInlineFigure(project.highlightsImage));
+    }
   }
 
   var gallery = document.getElementById('projectGallery');
